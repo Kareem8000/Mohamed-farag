@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>د. محمد فرج | استشاري جراحة الفم وزراعة الأسنان</title>
+    <meta name="description" content="مركز أسنان متخصص بالتجمع الأول بإشراف د. محمد فرج، استشاري جراحة الفم وزراعة الأسنان. خدمات شاملة: زراعة، تجميل، تقويم، وعلاج جذور بأحدث التقنيات.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts (Cairo) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        medical: {
+                            50: '#f9fafb',
+                            100: '#f3f4f6',
+                            primary: '#1c1917', // Stone 900
+                            secondary: '#a8a29e', // Stone 400
+                            accent: '#d97706', // Amber 600
+                            surface: '#fafaf9', // Stone 50
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Cairo"', 'sans-serif'],
+                    },
+                    animation: {
+                        'scroll': 'scroll 180s linear infinite',
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'pulse-ring': 'pulseRing 3s cubic-bezier(0.24, 0, 0.38, 1) infinite',
+                        'shimmer': 'shimmer 2s linear infinite',
+                        'float': 'float 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        scroll: {
+                            '0%': { transform: 'translateX(0)' },
+                            '100%': { transform: 'translateX(calc(100% + 1.5rem))' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        pulseRing: {
+                            '0%': { boxShadow: '0 0 0 0 rgba(217, 119, 6, 0.7)' },
+                            '70%': { boxShadow: '0 0 0 15px rgba(217, 119, 6, 0)' },
+                            '100%': { boxShadow: '0 0 0 0 rgba(217, 119, 6, 0)' },
+                        },
+                        shimmer: {
+                            '0%': { transform: 'translateX(-100%)' },
+                            '100%': { transform: 'translateX(100%)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-5px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html { 
+            scroll-behavior: smooth; 
+            scroll-padding-top: 100px; 
+        }
+        body { 
+            -webkit-font-smoothing: antialiased; 
+            -moz-osx-font-smoothing: grayscale; 
+            background-color: #fafaf9;
+            color: #292524;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(3rem);
+            transition: all 1s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Hero Slideshow */
+        .hero-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .hero-slide.active {
+            opacity: 0.5;
+        }
+        .hero-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1);
+            transition: transform 8s linear;
+        }
+        .hero-slide.active img {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body class="font-sans">
+
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="bg-white/80 backdrop-blur-lg rounded-2xl shadow-lg border border-white/20 px-6 py-3 flex items-center justify-between">
+                <a href="#" class="flex items-center gap-2 group">
+                    <div class="w-10 h-10 bg-medical-accent rounded-lg flex items-center justify-center text-white shadow-lg group-hover:rotate-12 transition-transform">
+                        <i data-lucide="stetho-scope"></i>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-xl font-extrabold text-medical-primary leading-none">د. محمد فرج</span>
+                        <span class="text-[10px] text-medical-accent font-bold uppercase tracking-tighter">Dental Clinic</span>
+                    </div>
+                </a>
+                
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#about" class="text-stone-600 hover:text-medical-accent font-bold transition-colors">عن العيادة</a>
+                    <a href="#services" class="text-stone-600 hover:text-medical-accent font-bold transition-colors">خدماتنا</a>
+                    <a href="#before-after" class="text-stone-600 hover:text-medical-accent font-bold transition-colors">قبل وبعد</a>
+                    <a href="#reviews" class="text-stone-600 hover:text-medical-accent font-bold transition-colors">آراء المرضى</a>
+                </div>
+
+                <a href="#contact" class="bg-medical-primary hover:bg-stone-800 text-white px-6 py-2.5 rounded-xl font-bold transition-all shadow-md hover:shadow-lg flex items-center gap-2">
+                    <i data-lucide="calendar" class="w-4 h-4"></i>
+                    <span>احجز الآن</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden bg-stone-900">
+        <div id="hero-slides">
+            <!-- Slides will be injected by JS -->
+        </div>
+        
+        <div class="container mx-auto px-4 relative z-10 text-center">
+            <div class="mb-10 animate-fade-in-up">
+                <div class="inline-flex items-center gap-3 py-3 px-8 border-2 border-medical-accent rounded-full text-medical-accent text-base md:text-lg tracking-wider font-bold bg-stone-900/80 backdrop-blur-xl shadow-2xl animate-pulse-ring relative overflow-hidden group">
+                    <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shimmer"></div>
+                    <span class="text-stone-300">خبرة تتجاوز</span>
+                    <div class="flex items-center gap-1 relative">
+                        <span id="experience-count" class="text-3xl md:text-5xl font-black text-white drop-shadow-md">0</span>
+                        <span class="text-3xl md:text-5xl font-black text-medical-accent animate-float drop-shadow-lg inline-block">+</span>
+                    </div>
+                    <span class="text-stone-300">سنوات</span>
+                </div>
+            </div>
+            
+            <div class="mb-8 animate-fade-in-up" style="animation-delay: 200ms;">
+                <h1 id="hero-title" class="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 leading-tight text-white drop-shadow-lg">
+                    <!-- Title injected by JS -->
+                </h1>
+            </div>
+            
+            <p id="hero-desc" class="text-stone-200 text-lg md:text-2xl max-w-3xl mx-auto mb-12 font-medium leading-relaxed animate-fade-in-up opacity-0" style="animation-delay: 400ms; animation-fill-mode: forwards;">
+                <!-- Description injected by JS -->
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-5 justify-center items-center animate-fade-in-up opacity-0" style="animation-delay: 600ms; animation-fill-mode: forwards;">
+                <a href="#contact" class="flex items-center justify-center gap-3 bg-medical-accent hover:bg-amber-700 text-white px-10 py-4 rounded-full font-bold text-lg transition-all w-full sm:w-auto min-w-[220px] shadow-lg hover:shadow-orange-500/20 transform hover:-translate-y-1">
+                    <i data-lucide="calendar"></i>
+                    حجز موعد
+                </a>
+                <a href="tel:+201281022070" class="flex items-center justify-center gap-3 bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/30 px-10 py-4 rounded-full font-bold text-lg transition-all w-full sm:w-auto min-w-[220px] hover:border-white/50">
+                    <i data-lucide="phone"></i>
+                    اتصل بنا
+                </a>
+            </div>
+        </div>
+
+        <div id="slide-indicators" class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex gap-3 z-20">
+            <!-- Indicators injected by JS -->
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-white overflow-hidden">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="w-full lg:w-1/2 relative order-2 lg:order-1 reveal">
+                    <div class="absolute top-0 right-0 w-full h-full border-4 border-medical-accent/20 rounded-2xl transform translate-x-4 -translate-y-4 z-0"></div>
+                    <img src="/images/about-room.jpg" alt="غرفة الكشف" class="w-full h-[450px] object-cover rounded-2xl shadow-2xl relative z-10 bg-stone-200" onerror="this.src='https://images.unsplash.com/photo-1629909615184-74f495363b63?q=80&w=2069&auto=format&fit=crop'">
+                    <div class="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.1)] border-r-4 border-medical-accent z-20 hidden md:block">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-medical-50 rounded-full flex items-center justify-center text-medical-accent">
+                                <i data-lucide="award"></i>
+                            </div>
+                            <div>
+                                <p class="text-3xl font-bold text-medical-primary">100%</p>
+                                <p class="text-stone-500 text-sm font-medium">رضا المرضى</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-full lg:w-1/2 order-1 lg:order-2 reveal" style="transition-delay: 200ms;">
+                    <h4 class="text-medical-accent font-bold tracking-wider uppercase mb-2">عن العيادة</h4>
+                    <h2 class="text-3xl md:text-5xl font-bold text-medical-primary mb-8 leading-tight">
+                        رعاية طبية تضع <span class="text-medical-accent">راحتك</span> في المقام الأول
+                    </h2>
+                    <p class="text-stone-600 mb-6 text-lg leading-loose text-justify">
+                        في عيادة د. محمد فرج، نؤمن بأن زيارة طبيب الأسنان يجب أن تكون تجربة مريحة ومطمئنة. فلسفتنا مبنية على أسس الشفافية، التعقيم الصارم، والدقة المتناهية. نحن نجمع بين الخبرة العلمية واللمسة الفنية لنقدم لك أفضل النتائج.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                        <div class="flex items-center gap-3 bg-medical-50 p-3 rounded-lg hover:bg-medical-100 transition-colors">
+                            <i data-lucide="check-circle-2" class="text-medical-accent w-5 h-5"></i>
+                            <span class="text-stone-700 font-semibold text-sm">خطط علاجية مخصصة لكل مريض</span>
+                        </div>
+                        <div class="flex items-center gap-3 bg-medical-50 p-3 rounded-lg hover:bg-medical-100 transition-colors">
+                            <i data-lucide="check-circle-2" class="text-medical-accent w-5 h-5"></i>
+                            <span class="text-stone-700 font-semibold text-sm">أحدث تقنيات التعقيم العالمية</span>
+                        </div>
+                        <div class="flex items-center gap-3 bg-medical-50 p-3 rounded-lg hover:bg-medical-100 transition-colors">
+                            <i data-lucide="check-circle-2" class="text-medical-accent w-5 h-5"></i>
+                            <span class="text-stone-700 font-semibold text-sm">بيئة هادئة ومريحة للأعصاب</span>
+                        </div>
+                        <div class="flex items-center gap-3 bg-medical-50 p-3 rounded-lg hover:bg-medical-100 transition-colors">
+                            <i data-lucide="check-circle-2" class="text-medical-accent w-5 h-5"></i>
+                            <span class="text-stone-700 font-semibold text-sm">شفافية تامة في الأسعار والعلاج</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-5 pt-6 border-t border-stone-100">
+                        <div class="w-20 h-20 rounded-full overflow-hidden border-2 border-medical-accent shadow-md flex-shrink-0">
+                            <img src="/images/doctor-profile.jpg" alt="د. محمد فرج" class="w-full h-full object-cover" onerror="this.parentElement.innerHTML='<div class=\'w-full h-full bg-stone-200 flex items-center justify-center\'><i data-lucide=\'user\' class=\'text-stone-400\'></i></div>'; lucide.createIcons();">
+                        </div>
+                        <div class="flex flex-col">
+                            <p class="text-xl font-bold text-medical-primary">د. محمد فرج</p>
+                            <p class="text-sm text-stone-700 font-bold mt-1">استشاري جراحة الفم وزراعة الأسنان - جامعة عين شمس</p>
+                            <p class="text-xs text-stone-500 mt-1">عضو هيئة تدريس كلية طب الأسنان الجامعة البريطانية في مصر</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 bg-medical-surface">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <h2 class="text-3xl md:text-5xl font-bold text-medical-primary mb-6">خدماتنا المتخصصة</h2>
+                <p class="text-stone-600 text-lg">نقدم باقة متكاملة من خدمات طب الأسنان بأحدث المعايير العالمية لضمان أفضل النتائج العلاجية والتجميلية.</p>
+            </div>
+            <div id="services-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Services injected by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Before After Section -->
+    <section id="before-after" class="py-24 bg-white overflow-hidden relative">
+        <div class="container mx-auto px-4 md:px-6 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <h2 class="text-3xl md:text-5xl font-bold text-medical-primary mb-6">قبل وبعد</h2>
+                <p class="text-stone-600 text-lg">شاهد التحولات المذهلة (صور توضح الحالة قبل العلاج في الأعلى وبعد العلاج في الأسفل).</p>
+            </div>
+        </div>
+
+        <div class="relative w-full overflow-hidden mt-8">
+            <div class="absolute top-0 left-0 w-8 md:w-24 h-full bg-gradient-to-r from-white to-transparent z-20 pointer-events-none"></div>
+            <div class="absolute top-0 right-0 w-8 md:w-24 h-full bg-gradient-to-l from-white to-transparent z-20 pointer-events-none"></div>
+            <div id="scroll-container" class="flex animate-scroll gap-6 w-max px-6">
+                <!-- Cases injected by JS -->
+            </div>
+        </div>
+        
+        <div class="mt-12 text-center container mx-auto px-4">
+            <p class="text-stone-500 text-sm italic">* الصور توضيحية لنتائج حقيقية داخل العيادة.</p>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="py-24 bg-medical-surface overflow-hidden">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="flex flex-col md:flex-row items-end justify-between mb-12 gap-6 reveal">
+                <div class="max-w-2xl">
+                    <h2 class="text-3xl md:text-5xl font-bold text-medical-primary mb-6">ماذا يقول مرضانا؟</h2>
+                    <p class="text-stone-600 text-lg">نفخر بثقة مرضانا والنتائج التي حققناها معهم. إليكم بعض تجاربهم الحقيقية من جوجل.</p>
+                </div>
+                <div class="flex items-center gap-4 bg-white p-4 rounded-2xl shadow-sm border border-stone-100">
+                    <div class="flex flex-col items-center px-4 border-l border-stone-100">
+                        <span class="text-3xl font-black text-medical-primary">4.9</span>
+                        <div class="flex text-amber-400">
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        </div>
+                    </div>
+                    <div class="text-sm font-bold text-stone-500">
+                        أكثر من 250 تقييم <br> على Google Maps
+                    </div>
+                </div>
+            </div>
+
+            <div id="reviews-container" class="flex overflow-x-auto gap-6 pb-8 no-scrollbar snap-x">
+                <!-- Reviews injected by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-24 bg-white">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <h2 class="text-3xl md:text-5xl font-bold text-medical-primary mb-6">جولة داخل العيادة</h2>
+                <p class="text-stone-600 text-lg">لمحة عن مرافقنا الحديثة، المعقمة، والمريحة المصممة خصيصاً لراحتك النفسية.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="reveal group relative overflow-hidden rounded-2xl shadow-lg h-80 cursor-pointer bg-stone-100 border border-stone-200">
+                    <img src="/images/reception.jpg" alt="منطقة الاستقبال" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=800&auto=format&fit=crop'">
+                    <div class="absolute inset-0 bg-stone-900/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center">
+                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center mb-3 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 text-medical-primary">
+                            <i data-lucide="plus"></i>
+                        </div>
+                        <span class="text-white font-bold text-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">منطقة الاستقبال</span>
+                    </div>
+                </div>
+                <div class="reveal group relative overflow-hidden rounded-2xl shadow-lg h-80 cursor-pointer bg-stone-100 border border-stone-200" style="transition-delay: 100ms;">
+                    <img src="/images/about-room.jpg" alt="غرفة الكشف" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://images.unsplash.com/photo-1629909615184-74f495363b63?q=80&w=800&auto=format&fit=crop'">
+                    <div class="absolute inset-0 bg-stone-900/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center">
+                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center mb-3 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 text-medical-primary">
+                            <i data-lucide="plus"></i>
+                        </div>
+                        <span class="text-white font-bold text-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">غرفة الكشف</span>
+                    </div>
+                </div>
+                <div class="reveal group relative overflow-hidden rounded-2xl shadow-lg h-80 cursor-pointer bg-stone-100 border border-stone-200" style="transition-delay: 200ms;">
+                    <img src="/images/facade.jpg" alt="واجهة العيادة" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" onerror="this.src='https://images.unsplash.com/photo-1516549655169-df83a0927f06?q=80&w=800&auto=format&fit=crop'">
+                    <div class="absolute inset-0 bg-stone-900/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center">
+                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center mb-3 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 text-medical-primary">
+                            <i data-lucide="plus"></i>
+                        </div>
+                        <span class="text-white font-bold text-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">واجهة العيادة</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-medical-surface">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="bg-white rounded-[2rem] shadow-2xl overflow-hidden border border-stone-100">
+                <div class="flex flex-col lg:flex-row">
+                    <div class="w-full lg:w-1/2 p-8 md:p-16">
+                        <h2 class="text-3xl md:text-5xl font-bold text-medical-primary mb-8">تواصل معنا</h2>
+                        <div class="space-y-8">
+                            <div class="flex items-start gap-5">
+                                <div class="w-12 h-12 bg-medical-50 rounded-xl flex items-center justify-center text-medical-accent flex-shrink-0">
+                                    <i data-lucide="map-pin"></i>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-medical-primary text-lg mb-1">العنوان</p>
+                                    <p class="text-stone-600 leading-relaxed">التجمع الأول – محور مصطفى كامل – مول رقم 19 – بجوار مستشفى تبارك – القاهرة</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-5">
+                                <div class="w-12 h-12 bg-medical-50 rounded-xl flex items-center justify-center text-medical-accent flex-shrink-0">
+                                    <i data-lucide="phone"></i>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-medical-primary text-lg mb-1">رقم الهاتف</p>
+                                    <a href="tel:+201281022070" class="text-stone-600 hover:text-medical-accent transition-colors text-xl dir-ltr inline-block">+20 128 102 2070</a>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-5">
+                                <div class="w-12 h-12 bg-medical-50 rounded-xl flex items-center justify-center text-medical-accent flex-shrink-0">
+                                    <i data-lucide="clock"></i>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-medical-primary text-lg mb-1">مواعيد العمل</p>
+                                    <p class="text-stone-600">السبت - الخميس: 12:00 ظهراً - 10:00 مساءً</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-12 pt-12 border-t border-stone-100">
+                            <p class="font-bold text-medical-primary mb-6">تابعنا على منصات التواصل</p>
+                            <div class="flex gap-4">
+                                <a href="https://www.facebook.com/share/1BLwgyj9pR/?mibextid=wwXIfr" target="_blank" class="w-12 h-12 bg-stone-100 hover:bg-medical-accent hover:text-white rounded-xl flex items-center justify-center transition-all text-stone-600">
+                                    <i data-lucide="facebook"></i>
+                                </a>
+                                <a href="https://www.instagram.com/drfarag.dentist" target="_blank" class="w-12 h-12 bg-stone-100 hover:bg-medical-accent hover:text-white rounded-xl flex items-center justify-center transition-all text-stone-600">
+                                    <i data-lucide="instagram"></i>
+                                </a>
+                                <a href="https://www.tiktok.com/@dr.mohamed.farag8?_t=ZS-8zcSGVXLTfe&_r=1" target="_blank" class="w-12 h-12 bg-stone-100 hover:bg-medical-accent hover:text-white rounded-xl flex items-center justify-center transition-all text-stone-600">
+                                    <i data-lucide="music-2"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full lg:w-1/2 h-[400px] lg:h-auto min-h-[500px]">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.163776269666!2d31.4444017!3d30.0602232!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14581805501f0d47%3A0xf7386588602e3ac0!2sDr.Mohamed%20Farag%20Dental%20Clinic!5e0!3m2!1sen!2seg!4v1707654321000!5m2!1sen!2seg" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-medical-primary text-white py-16">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8 pb-12 border-b border-white/10">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 bg-medical-accent rounded-xl flex items-center justify-center text-white shadow-lg">
+                        <i data-lucide="stetho-scope"></i>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-2xl font-extrabold leading-none">د. محمد فرج</span>
+                        <span class="text-xs text-medical-accent font-bold uppercase tracking-widest mt-1">Dental Clinic</span>
+                    </div>
+                </div>
+                <div class="flex gap-8">
+                    <a href="#about" class="hover:text-medical-accent transition-colors font-medium">عن العيادة</a>
+                    <a href="#services" class="hover:text-medical-accent transition-colors font-medium">خدماتنا</a>
+                    <a href="#contact" class="hover:text-medical-accent transition-colors font-medium">اتصل بنا</a>
+                </div>
+            </div>
+            <div class="pt-12 flex flex-col md:flex-row justify-between items-center gap-6 text-stone-400 text-sm">
+                <p>© 2026 عيادة د. محمد فرج. جميع الحقوق محفوظة.</p>
+                <p>تم التصميم بكل حب لابتسامتكم.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/201281022070" target="_blank" class="fixed bottom-8 right-8 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform animate-bounce">
+        <i data-lucide="message-circle" class="w-8 h-8"></i>
+    </a>
+
+    <!-- Main Script -->
+    <script src="script.js"></script>
+</body>
+</html>
